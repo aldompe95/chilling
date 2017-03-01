@@ -1,32 +1,41 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Chilling</title>
-</head>
-<body>
-</body>
-<script type="text/javascript">
+  <head>
+    <title>Chilling</title>
+  </head>
+  <body>
+  </body>
+  <script type="text/javascript">
 
-  const endpoint = 'https://gist.githubusercontent.com/aldompe95/076f3665938df9d8342cac553f27bc7a/raw/306c075736729f9ee2e5c0b9839e592faba7bdb3/movies.json'; // Assign the json url
+    const endpoint = 'https://gist.githubusercontent.com/aldompe95/076f3665938df9d8342cac553f27bc7a/raw/306c075736729f9ee2e5c0b9839e592faba7bdb3/movies.json'; // Assign the json url
 
-  const movies = []; // Create array where the json will be saved
-
-  fetch(endpoint)
-    .then(blob => blob.json()) // Load and extract the json content
-    .then(data => movies.push(...data)); // Save the data into array
-
-  // Find location movies  
-  function findMovies(city, movies){
-    const locationMovies = [];
-    movies.forEach(movie =>{
-      movie.cities.forEach(cities=>{
-        const regex = new RegExp(city, 'gi');
-        if(cities.city.match(regex)){locationMovies.push(movie);}
-      });
-    });
-    return locationMovies;
-  }
+    const movies = []; // Create array where the json will be saved
+    let locationMovies; // Define location movies variable
     
-</script>
+    /* ES7, just testing...
+    (async() => {
+      var response = await fetch(endpoint);
+      var data = await response.json(); // Load and extract the json content
+      await movies.push(...data); // Save the data into array
+    })();*/   
+
+    // ES6
+    fetch(endpoint)
+      .then(blob => blob.json()) // Load and extract the json content
+      .then(data => movies.push(...data)); // Save the data into array
+    
+    // Find location movies
+    function findMovies(city, movies){
+      locationMovies = [];
+      movies.forEach(movie =>{
+        movie.cities.forEach(cities=>{
+          const regex = new RegExp(city, 'gi');
+          if(cities.city.match(regex)){locationMovies.push(movie);}
+        });
+      });
+    }
+
+  </script>
+
 </html>
 
