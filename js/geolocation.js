@@ -11,6 +11,7 @@
           navigator.geolocation.getCurrentPosition(setPosition);
         }else{alert("Geolocation is not supported by this browser.");}
     }
+    
     function setPosition(position){
       geolocation = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=AIzaSyBn-efsvIZ0_4w4zNu_ZL1beaJwiE-KpTw`; // get specified cordinates
       getLocationJson();
